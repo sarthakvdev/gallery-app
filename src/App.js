@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Users from "./components/Users";
+import AlbumPage from "./Pages/albumPage";
+import GalleryPage from "./Pages/galleryPage";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useState } from "react";
 
-function App() {
+// homepage component '/'
+const Homepage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="search-box">
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search"
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+      </div>
+      <Users searchTerm={searchTerm} />
     </div>
   );
-}
+};
+
+// root component
+const App = () => {
+  return (
+    <div>
+      <Router>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/:userId/albums" component={AlbumPage} />
+        <Route path="/albums/:albumId" component={GalleryPage} />
+      </Router>
+    </div>
+  );
+};
 
 export default App;
