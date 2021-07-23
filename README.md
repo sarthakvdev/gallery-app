@@ -2,13 +2,12 @@
 
 ### Create a react App with the following specifications:
 
-1. HomePage : This will be the landing page where you can view all the users. Display the
-following fields for each user
+1. HomePage : This will be the landing page where you can view all the users. </br> Display the following fields for each user:
 - Name (should be a clickable hyperlink)
 - Username
 - Email
 - Number of Albums
-Provide a search bar to filter the list of users.
+</br></br>Provide a search bar to filter the list of users.
 On clicking on the name of the user it should open the Albums page.
 
 2. Album page: On this page you can view all the albums created by a user. Display the
