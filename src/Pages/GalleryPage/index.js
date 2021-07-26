@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
-import GalleryCard from '../components/GalleryCard';
+import { useEffect } from 'react';
+import GalleryCard from './GalleryCard';
 import styled from 'styled-components';
+// react-redux hooks
+import { useDispatch, useSelector } from 'react-redux';
+// action
+import { getGallery } from "../../redux/ducks/gallery";
 
 const StyledGallery = styled.div`
     display: grid;
@@ -33,33 +36,23 @@ const GalleryPage = ({ match }) => {
         params: { albumId },
     } = match;
 
-    const [pictures, setPictures] = useState([]);
-
+    const dispatch = useDispatch();
+    
+    // dispatching getGallery action (with albumId)
     useEffect(() => {
-        const abortController = new AbortController();
-        const signal = AbortController.signal;
-
-        // gettig the users data for using his name
-        Axios.get(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`, { signal: signal })
-        .then(response => {
-            setPictures(response.data);
-        });
-
-        // cleanup after this effect:
-        return function cleanup() {
-            abortController.abort();
-        };
-    });
-
+        dispatch(getGallery(albumId));
+    }, [dispatch, albumId]);
+    // importing gallery pictures
+    const pictures = useSelector((store) => store.gallery.gallery);
     return(
         <StyledGallery>
-            { pictures.map((picture, index) => <GalleryCard
+            { pictures ? pictures.map((picture, index) => <GalleryCard
                     key={index+1}
                     id={picture.id}
                     title={picture.title}
                     url={picture.url}
                     thumbnailUrl={picture.thumbnailUrl} 
-                />)
+                />) : ""
             }
         </StyledGallery>
     )

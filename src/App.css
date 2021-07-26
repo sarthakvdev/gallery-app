@@ -3,12 +3,26 @@
 }
 
 .search-box {
-  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 20px;
-  margin: 30px auto;
+  top: 0;
+  position: sticky;
+  background: red;
+  padding: 30px;
+  background: rgba( 255, 255, 255, 0.10 );
+  box-shadow: 0 8px 20px 0 rgba( 31, 38, 135, 0.20 );
+  backdrop-filter: blur( 3.5px );
+  -webkit-backdrop-filter: blur( 3.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .search-input {
-  width: 100%;
+  width: 30%;
   padding: 10px;
+  border-radius: 5px;
+  border: 2px solid rgb(210, 210, 210);
+  background: transparent;
 }
